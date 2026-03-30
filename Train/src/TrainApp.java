@@ -42,6 +42,28 @@ public class TrainApp {
         System.out.println(bogieIds);
 
         System.out.println("Total Unique Bogies Registered: " + bogieIds.size());
+
+        System.out.println(" === UC4 ===");
+        LinkedList<String> train = new LinkedList<>();
+
+        // 1. Building the train (addLast is default)
+        train.add("Sleeper");
+        train.add("AC Chair");
+
+        train.addFirst("Engine");
+
+        train.addLast("Guard Coach");
+
+        System.out.println("Initial Train: " + train);
+
+
+        train.add(2, "Pantry Car");
+        System.out.println("After Adding Pantry: " + train);
+
+        String removedFront = train.removeFirst();
+        String removedBack = train.removeLast();
+
+        System.out.println("\nDetached: " + removedFront + " and " + removedBack);
+        System.out.println("Final Operational Consist: " + train);
     }
 }
-
