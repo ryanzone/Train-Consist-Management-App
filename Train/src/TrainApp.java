@@ -65,5 +65,33 @@ public class TrainApp {
 
         System.out.println("\nDetached: " + removedFront + " and " + removedBack);
         System.out.println("Final Operational Consist: " + train);
+
+        Set<String> trainFormation = new LinkedHashSet<>();
+
+        System.out.println("--- UC5: Building Ordered Train Formation ---");
+
+        // 2. Attach bogies in a specific sequence
+        trainFormation.add("Engine");
+        trainFormation.add("Sleeper");
+        trainFormation.add("Cargo");
+        trainFormation.add("Guard");
+
+        System.out.println("Attempting to attach duplicate: 'Sleeper'...");
+        boolean isAdded_2 = trainFormation.add("Sleeper");
+
+        if (!isAdded_2) {
+            System.out.println("Safety Alert: Duplicate 'Sleeper' bogie rejected!");
+        }
+
+        // 4. Adding a new unique bogie
+        trainFormation.add("AC Chair");
+
+        // 5. Display the final formation
+        System.out.println("\nFinal Train Formation (Order Preserved):");
+        // Unlike HashSet, this will ALWAYS print in the order added
+        System.out.println(trainFormation);
+
+        // 6. Verify the count
+        System.out.println("Total unique bogies in formation: " + trainFormation.size());
     }
 }
