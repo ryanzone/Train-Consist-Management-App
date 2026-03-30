@@ -70,7 +70,6 @@ public class TrainApp {
 
         System.out.println("--- UC5: Building Ordered Train Formation ---");
 
-        // 2. Attach bogies in a specific sequence
         trainFormation.add("Engine");
         trainFormation.add("Sleeper");
         trainFormation.add("Cargo");
@@ -83,15 +82,35 @@ public class TrainApp {
             System.out.println("Safety Alert: Duplicate 'Sleeper' bogie rejected!");
         }
 
-        // 4. Adding a new unique bogie
+
         trainFormation.add("AC Chair");
 
-        // 5. Display the final formation
         System.out.println("\nFinal Train Formation (Order Preserved):");
-        // Unlike HashSet, this will ALWAYS print in the order added
+
         System.out.println(trainFormation);
 
-        // 6. Verify the count
         System.out.println("Total unique bogies in formation: " + trainFormation.size());
+
+        Map<String, Integer> bogieCapacityMap = new HashMap<>();
+
+        System.out.println("--- UC6: Mapping Bogie Types to Capacities ---");
+
+        bogieCapacityMap.put("Sleeper", 72);
+        bogieCapacityMap.put("AC Chair", 56);
+        bogieCapacityMap.put("First Class", 24);
+        bogieCapacityMap.put("Cargo", 5000);
+        bogieCapacityMap.put("Engine", 0);
+
+        String searchBogie = "Sleeper";
+        if (bogieCapacityMap.containsKey(searchBogie)) {
+            System.out.println("Quick Lookup: " + searchBogie + " capacity is " + bogieCapacityMap.get(searchBogie) + " seats.");
+        }
+
+        System.out.println("\n--- Full Consist Capacity Report ---");
+        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
+            System.out.println("Bogie Type: " + entry.getKey() + " | Capacity: " + entry.getValue());
+        }
+        bogieCapacityMap.put("Sleeper", 80);
+        System.out.println("\nUpdated Sleeper Capacity: " + bogieCapacityMap.get("Sleeper"));
     }
 }
