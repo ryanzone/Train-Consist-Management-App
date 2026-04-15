@@ -17,6 +17,21 @@ class Bogie {
     }
 }
 
+class GoodsBogie {
+    String type;
+    String cargo;
+
+    GoodsBogie(String type, String cargo) {
+        this.type = type;
+        this.cargo = cargo;
+    }
+
+    @Override
+    public String toString() {
+        return type + " carrying " + cargo;
+    }
+}
+
 public class TrainApp {
     public static void main(String[] args) {
 
@@ -156,7 +171,6 @@ public class TrainApp {
 
         System.out.println("Total Seating Capacity: " + totalCapacity);
 
-        // --- UC11: Regex Validation ---
         System.out.println("\n--- UC11: Train ID & Cargo Code Validation ---");
 
         Scanner sc = new Scanner(System.in);
@@ -170,19 +184,38 @@ public class TrainApp {
         Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
         Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
 
-        Matcher trainMatcher = trainPattern.matcher(trainId);
-        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
-
-        if (trainMatcher.matches()) {
+        if (trainPattern.matcher(trainId).matches()) {
             System.out.println("Train ID is VALID");
         } else {
             System.out.println("Train ID is INVALID");
         }
 
-        if (cargoMatcher.matches()) {
+        if (cargoPattern.matcher(cargoCode).matches()) {
             System.out.println("Cargo Code is VALID");
         } else {
             System.out.println("Cargo Code is INVALID");
+        }
+
+        // --- UC12: Functional Interface + allMatch Validation ---
+        System.out.println("\n--- UC12: Safety Validation for Goods Bogies ---");
+
+        List<GoodsBogie> goodsBogies = new ArrayList<>();
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
+        goodsBogies.add(new GoodsBogie("Box", "Coal"));
+        goodsBogies.add(new GoodsBogie("Cylindrical", "Petroleum"));
+
+        boolean isSafe = goodsBogies.stream()
+                .allMatch(b -> {
+                    if (b.type.equals("Cylindrical")) {
+                        return b.cargo.equals("Petroleum");
+                    }
+                    return true;
+                });
+
+        if (isSafe) {
+            System.out.println("Train is SAFE for operation");
+        } else {
+            System.out.println("Train is NOT SAFE");
         }
 
         sc.close();
