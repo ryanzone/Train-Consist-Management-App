@@ -1,5 +1,6 @@
 import java.util.*;
 import java.util.stream.*;
+import java.util.regex.*;
 
 class Bogie {
     String type;
@@ -148,13 +149,42 @@ public class TrainApp {
             }
         }
 
-        // --- UC10: Total Seating Capacity using Stream Reduction ---
         System.out.println("\n--- UC10: Total Seating Capacity ---");
-
         int totalCapacity = passengerObjects.stream()
                 .map(b -> b.capacity)
                 .reduce(0, Integer::sum);
 
         System.out.println("Total Seating Capacity: " + totalCapacity);
+
+        // --- UC11: Regex Validation ---
+        System.out.println("\n--- UC11: Train ID & Cargo Code Validation ---");
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter Train ID (format TRN-1234): ");
+        String trainId = sc.nextLine();
+
+        System.out.print("Enter Cargo Code (format PET-AB): ");
+        String cargoCode = sc.nextLine();
+
+        Pattern trainPattern = Pattern.compile("TRN-\\d{4}");
+        Pattern cargoPattern = Pattern.compile("PET-[A-Z]{2}");
+
+        Matcher trainMatcher = trainPattern.matcher(trainId);
+        Matcher cargoMatcher = cargoPattern.matcher(cargoCode);
+
+        if (trainMatcher.matches()) {
+            System.out.println("Train ID is VALID");
+        } else {
+            System.out.println("Train ID is INVALID");
+        }
+
+        if (cargoMatcher.matches()) {
+            System.out.println("Cargo Code is VALID");
+        } else {
+            System.out.println("Cargo Code is INVALID");
+        }
+
+        sc.close();
     }
 }
