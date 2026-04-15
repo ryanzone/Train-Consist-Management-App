@@ -196,7 +196,6 @@ public class TrainApp {
             System.out.println("Cargo Code is INVALID");
         }
 
-        // --- UC12: Functional Interface + allMatch Validation ---
         System.out.println("\n--- UC12: Safety Validation for Goods Bogies ---");
 
         List<GoodsBogie> goodsBogies = new ArrayList<>();
@@ -217,6 +216,40 @@ public class TrainApp {
         } else {
             System.out.println("Train is NOT SAFE");
         }
+
+        // --- UC13: Performance Comparison ---
+        System.out.println("\n--- UC13: Loop vs Stream Performance ---");
+
+        List<Bogie> testBogies = new ArrayList<>();
+        for (int i = 0; i < 100000; i++) {
+            testBogies.add(new Bogie("Type" + i, i % 100));
+        }
+
+        // Loop-based filtering
+        long startLoop = System.nanoTime();
+
+        List<Bogie> loopResult = new ArrayList<>();
+        for (Bogie b : testBogies) {
+            if (b.capacity > 60) {
+                loopResult.add(b);
+            }
+        }
+
+        long endLoop = System.nanoTime();
+        long loopTime = endLoop - startLoop;
+
+        // Stream-based filtering
+        long startStream = System.nanoTime();
+
+        List<Bogie> streamResult = testBogies.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        long endStream = System.nanoTime();
+        long streamTime = endStream - startStream;
+
+        System.out.println("Loop Time (ns): " + loopTime);
+        System.out.println("Stream Time (ns): " + streamTime);
 
         sc.close();
     }
