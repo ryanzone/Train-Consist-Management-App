@@ -137,9 +137,7 @@ public class TrainApp {
         System.out.println("Filtered Bogies:");
         filteredBogies.forEach(b -> System.out.println("-> " + b));
 
-        // --- UC9: Grouping Bogies ---
         System.out.println("\n--- UC9: Grouping Bogies by Type ---");
-
         Map<String, List<Bogie>> groupedBogies = passengerObjects.stream()
                 .collect(Collectors.groupingBy(b -> b.type));
 
@@ -149,5 +147,14 @@ public class TrainApp {
                 System.out.println("-> " + b);
             }
         }
+
+        // --- UC10: Total Seating Capacity using Stream Reduction ---
+        System.out.println("\n--- UC10: Total Seating Capacity ---");
+
+        int totalCapacity = passengerObjects.stream()
+                .map(b -> b.capacity)
+                .reduce(0, Integer::sum);
+
+        System.out.println("Total Seating Capacity: " + totalCapacity);
     }
 }
