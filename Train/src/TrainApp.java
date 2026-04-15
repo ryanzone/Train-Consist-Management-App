@@ -129,16 +129,25 @@ public class TrainApp {
         System.out.println("\nSorted Consist (Descending Capacity):");
         passengerObjects.forEach(b -> System.out.println("-> " + b));
 
-        // --- UC8: Filtering Bogies using Stream API ---
         System.out.println("\n--- UC8: Filtering Bogies with Capacity > 60 ---");
-
         List<Bogie> filteredBogies = passengerObjects.stream()
                 .filter(b -> b.capacity > 60)
                 .collect(Collectors.toList());
 
         System.out.println("Filtered Bogies:");
-        for (Bogie b : filteredBogies) {
-            System.out.println("-> " + b);
+        filteredBogies.forEach(b -> System.out.println("-> " + b));
+
+        // --- UC9: Grouping Bogies ---
+        System.out.println("\n--- UC9: Grouping Bogies by Type ---");
+
+        Map<String, List<Bogie>> groupedBogies = passengerObjects.stream()
+                .collect(Collectors.groupingBy(b -> b.type));
+
+        for (Map.Entry<String, List<Bogie>> entry : groupedBogies.entrySet()) {
+            System.out.println("\nCategory: " + entry.getKey());
+            for (Bogie b : entry.getValue()) {
+                System.out.println("-> " + b);
+            }
         }
     }
 }
