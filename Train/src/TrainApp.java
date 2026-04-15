@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.*;
 
 class Bogie {
     String type;
@@ -127,5 +128,17 @@ public class TrainApp {
         passengerObjects.sort(Comparator.comparingInt((Bogie b) -> b.capacity).reversed());
         System.out.println("\nSorted Consist (Descending Capacity):");
         passengerObjects.forEach(b -> System.out.println("-> " + b));
+
+        // --- UC8: Filtering Bogies using Stream API ---
+        System.out.println("\n--- UC8: Filtering Bogies with Capacity > 60 ---");
+
+        List<Bogie> filteredBogies = passengerObjects.stream()
+                .filter(b -> b.capacity > 60)
+                .collect(Collectors.toList());
+
+        System.out.println("Filtered Bogies:");
+        for (Bogie b : filteredBogies) {
+            System.out.println("-> " + b);
+        }
     }
 }
