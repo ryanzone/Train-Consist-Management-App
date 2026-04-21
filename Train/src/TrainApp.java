@@ -43,7 +43,6 @@ class GoodsBogie {
         this.cargo = cargo;
     }
 
-    // --- UC15 Logic ---
     void assignCargo(String cargo) {
         try {
             if (type.equals("Rectangular") && cargo.equals("Petroleum")) {
@@ -266,10 +265,39 @@ public class TrainApp {
         GoodsBogie g1 = new GoodsBogie("Cylindrical", null);
         GoodsBogie g2 = new GoodsBogie("Rectangular", null);
 
-        g1.assignCargo("Petroleum");   // valid
-        g2.assignCargo("Petroleum");   // invalid
+        g1.assignCargo("Petroleum");
+        g2.assignCargo("Petroleum");
 
         System.out.println("Program continues safely after handling exception.");
+
+        // --- UC16 ---
+        System.out.println("\n--- UC16: Sorting Passenger Bogie Capacities (Bubble Sort) ---");
+
+        int[] capacities = {72, 56, 24, 70, 60};
+
+        System.out.print("Original Capacities: ");
+        for (int cap : capacities) {
+            System.out.print(cap + " ");
+        }
+
+        int n = capacities.length;
+
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (capacities[j] > capacities[j + 1]) {
+                    int temp = capacities[j];
+                    capacities[j] = capacities[j + 1];
+                    capacities[j + 1] = temp;
+                }
+            }
+        }
+
+        System.out.print("\nSorted Capacities: ");
+        for (int cap : capacities) {
+            System.out.print(cap + " ");
+        }
+
+        System.out.println("\nProgram continues...");
 
         sc.close();
     }
