@@ -299,6 +299,19 @@ public class TrainApp {
 
         System.out.println("\nProgram continues...");
 
+        // --- UC17 ---
+        System.out.println("\n--- UC17: Sorting Bogie Names using Arrays.sort() ---");
+
+        String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
+
+        System.out.println("Original Bogie Names: " + Arrays.toString(bogieNames));
+
+        Arrays.sort(bogieNames);
+
+        System.out.println("Sorted Bogie Names: " + Arrays.toString(bogieNames));
+
+        System.out.println("Program continues...");
+
         sc.close();
     }
 }
