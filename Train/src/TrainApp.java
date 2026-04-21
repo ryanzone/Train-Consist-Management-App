@@ -276,14 +276,10 @@ public class TrainApp {
         int[] capacities = {72, 56, 24, 70, 60};
 
         System.out.print("Original Capacities: ");
-        for (int cap : capacities) {
-            System.out.print(cap + " ");
-        }
+        for (int cap : capacities) System.out.print(cap + " ");
 
-        int n = capacities.length;
-
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
+        for (int i = 0; i < capacities.length - 1; i++) {
+            for (int j = 0; j < capacities.length - i - 1; j++) {
                 if (capacities[j] > capacities[j + 1]) {
                     int temp = capacities[j];
                     capacities[j] = capacities[j + 1];
@@ -293,22 +289,39 @@ public class TrainApp {
         }
 
         System.out.print("\nSorted Capacities: ");
-        for (int cap : capacities) {
-            System.out.print(cap + " ");
-        }
-
-        System.out.println("\nProgram continues...");
+        for (int cap : capacities) System.out.print(cap + " ");
 
         // --- UC17 ---
-        System.out.println("\n--- UC17: Sorting Bogie Names using Arrays.sort() ---");
+        System.out.println("\n\n--- UC17: Sorting Bogie Names using Arrays.sort() ---");
 
         String[] bogieNames = {"Sleeper", "AC Chair", "First Class", "General", "Luxury"};
 
         System.out.println("Original Bogie Names: " + Arrays.toString(bogieNames));
-
         Arrays.sort(bogieNames);
-
         System.out.println("Sorted Bogie Names: " + Arrays.toString(bogieNames));
+
+        // --- UC18 ---
+        System.out.println("\n--- UC18: Linear Search for Bogie ID ---");
+
+        String[] bogieIdArray = {"BG101", "BG205", "BG309", "BG412", "BG550"};
+
+        System.out.print("Enter Bogie ID to search: ");
+        String searchKey = sc.nextLine();
+
+        boolean found = false;
+
+        for (String id : bogieIdArray) {
+            if (id.equals(searchKey)) {
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " FOUND in the train consist.");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " NOT FOUND.");
+        }
 
         System.out.println("Program continues...");
 
